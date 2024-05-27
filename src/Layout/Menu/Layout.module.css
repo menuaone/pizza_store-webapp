@@ -1,0 +1,59 @@
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    padding: 30px;
+    border-right: 1px solid var(--separator-color);
+    display: flex;
+    flex-direction: column;
+}
+
+.exit {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.user {
+    margin-bottom: 46px;
+}
+
+.avatar {
+    margin-bottom: 20px;
+    /* box-shadow: 0 8px 40px 0 rgba(255, 197, 41, 0.25); */
+    filter: drop-shadow(0 8px 40px 0, rgba(0, 0, 0, 1));
+}
+
+.name {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: normal;
+    font-style: normal;
+    color: var(--text-color);
+}
+
+.email {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+    font-style: normal;
+    color: #9ea1b1;
+}
