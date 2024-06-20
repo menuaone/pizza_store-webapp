@@ -17,7 +17,7 @@ const Search = forwardRef<HTMLInputElement, SearchProps>(function Search(
                 {...props}
             />
             <img
-                src='/public/search-icon.svg'
+                src='search-icon.svg'
                 alt='поиск'
                 className={styles['search-icon']}
             />
