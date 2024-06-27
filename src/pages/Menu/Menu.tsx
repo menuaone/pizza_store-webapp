@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { Product } from '../../interfaces/product.interface';
 import Headling from '../../components/Headling/Headling';
 import Search from '../../components/Search/Search';
@@ -8,12 +8,24 @@ import axios, { AxiosError } from 'axios';
 import { MenuList } from './MenuList/MenuList';
 
 export function Menu() {
+    // получение продуктов
     const [products, setProducts] = useState<Product[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | undefined>();
+    // состояние поиска
+    const [filter, setFilter] = useState<string>();
+
+    // срабатывает при монтировании компонента, а также работает фильтр
+    useEffect(() => {
+        getMenu(filter);
+    }, [filter]);
+
+    const updateFilter = (e: ChangeEvent<HTMLInputElement>) => {
+        setFilter(e.target.value);
+    };
 
     // использование axios
-    const getMenu = async () => {
+    const getMenu = async (name?: string) => {
         try {
             setIsLoading(true);
             // установлен загрузчик на 2 секунды
@@ -22,7 +34,11 @@ export function Menu() {
             //         resolve();
             //     }, 2000);
             // });
-            const { data } = await axios.get<Product[]>(`${PREFIX}/products`);
+            const { data } = await axios.get<Product[]>(`${PREFIX}/products`, {
+                params: {
+                    name,
+                },
+            });
             setProducts(data);
             setIsLoading(false);
         } catch (e) {
@@ -49,20 +65,24 @@ export function Menu() {
         // }
     };
 
-    useEffect(() => {
-        getMenu();
-    }, []);
-
     return (
         <>
             <div className={styles['head']}>
                 <Headling>Меню</Headling>
-                <Search placeholder='Введите блюдо или состав' />
+                <Search
+                    placeholder='Введите блюдо или состав'
+                    onChange={updateFilter}
+                />
             </div>
             <div>
                 {error && <>{error}</>}
-                {!isLoading && <MenuList products={products} />}
+                {!isLoading && products.length > 0 && (
+                    <MenuList products={products} />
+                )}
                 {isLoading && <>Идет загрузка продуктов...</>}
+                {!isLoading && products.length === 0 && (
+                    <>Не найдено блюд по запросу</>
+                )}
             </div>
         </>
     );

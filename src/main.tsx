@@ -16,6 +16,7 @@ import { Register } from './pages/Register/Register.tsx';
 import { RequireAuth } from './helpers/RequireAuth.tsx';
 import { Provider } from 'react-redux';
 import { store } from './store/store.ts';
+import { Success } from './pages/Success/Success.tsx';
 
 // eslint-disable-next-line react-refresh/only-export-components
 const Menu = lazy(() => import('./pages/Menu/Menu.tsx'));
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
                         <Menu />
                     </Suspense>
                 ),
+            },
+            {
+                path: '/success',
+                element: <Success />,
             },
             { path: '/cart', element: <Cart /> },
             {

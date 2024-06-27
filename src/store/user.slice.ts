@@ -6,6 +6,7 @@ import { LoginResponse } from '../interfaces/auth.interface';
 import { Profile } from '../interfaces/user.profile';
 import { rootState } from './store';
 
+// начальное состояние
 export const JWT_PERSISTENT_STATE = 'userData';
 
 export interface UserPersistantState {
